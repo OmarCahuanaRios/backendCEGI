@@ -1,0 +1,73 @@
+package com.backend.app.service.impl;
+
+import com.backend.app.dto.WorkerDto;
+import com.backend.app.dto.create.WorkerCreateDto;
+import com.backend.app.exception.DataProcessingException;
+import com.backend.app.exception.ResourceNotFoundException;
+import com.backend.app.model.Worker;
+import com.backend.app.repository.WorkerRepository;
+import com.backend.app.service.WorkerService;
+import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@AllArgsConstructor
+public class WorkerServiceImpl implements WorkerService {
+
+    private final WorkerRepository workerRepository;
+
+    private final ModelMapper modelMapper;
+
+    @Override
+    public List<WorkerDto> findAllWorkers() {
+        return workerRepository.findAll().stream()
+                .map(worker -> modelMapper.map(worker, WorkerDto.class))
+                .toList();
+    }
+
+    @Override
+    public WorkerDto findWorkerById(Integer id) {
+        Worker optionalWorker = workerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Worker", "id", id));
+        return modelMapper.map(optionalWorker, WorkerDto.class);
+    }
+
+    @Override
+    public WorkerDto createWorker(WorkerCreateDto workerCreateDto) {
+        try {
+            Worker worker = workerRepository.save(modelMapper.map(workerCreateDto, Worker.class));
+            return modelMapper.map(worker, WorkerDto.class);
+        } catch (Exception e) {
+            throw new DataProcessingException("Error creating the worker.");
+        }
+    }
+
+    @Override
+    public WorkerDto updateWorker(Integer id, WorkerCreateDto workerCreateDto) {
+        try {
+            Worker optionalWorker = workerRepository.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("Worker", "id", id));
+            BeanUtils.copyProperties(workerCreateDto, optionalWorker, "id", "createdBy", "createdDate");
+            return modelMapper.map(workerRepository.save(optionalWorker), WorkerDto.class);
+        } catch (Exception e) {
+            throw new DataProcessingException("Error updating the worker with ID: " + id);
+        }
+    }
+
+    @Override
+    public WorkerDto deleteWorker(Integer id) {
+        try {
+            Worker optionalWorker = workerRepository.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("Worker", "id", id));
+            workerRepository.deleteById(optionalWorker.getId());
+            return modelMapper.map(optionalWorker, WorkerDto.class);
+        } catch (Exception e) {
+            //Throw a custom exception
+            throw new DataProcessingException("Error deleting the worker with ID: " + id);
+        }
+    }
+}
