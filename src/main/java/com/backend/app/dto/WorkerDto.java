@@ -1,6 +1,7 @@
 package com.backend.app.dto;
 
 import com.backend.app.model.Auditable;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonPropertyOrder({"id", "firstName", "lastName", "email", "enterprise", "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate"})
 public class WorkerDto extends Auditable<String> {
     private Integer id;
 

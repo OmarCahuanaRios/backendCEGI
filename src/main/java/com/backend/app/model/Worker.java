@@ -14,7 +14,7 @@ import org.hibernate.envers.Audited;
 @Table(name = "workers")
 @Audited
 @AuditTable(value = "aud_worker")
-public class Worker {
+public class Worker extends Auditable<String> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

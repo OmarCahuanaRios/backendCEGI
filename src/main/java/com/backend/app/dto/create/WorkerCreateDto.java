@@ -2,6 +2,7 @@ package com.backend.app.dto.create;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,6 +27,6 @@ public class WorkerCreateDto {
     @Email
     private String email;
 
-    @NotBlank(message = "Enterprise id is required")
+    @NotNull(message = "Enterprise id is required")
     private Integer enterpriseId;
 }

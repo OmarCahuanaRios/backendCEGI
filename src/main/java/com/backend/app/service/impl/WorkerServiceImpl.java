@@ -49,6 +49,8 @@ public class WorkerServiceImpl implements WorkerService {
             BeanUtils.copyProperties(workerCreateDto, worker);
             worker.setEnterprise(enterprise);
             return modelMapper.map(workerRepository.save(worker), WorkerDto.class);
+        } catch (ResourceNotFoundException e) {
+            throw e;
         } catch (Exception e) {
             throw new DataProcessingException("Error creating the worker.");
         }
@@ -64,6 +66,8 @@ public class WorkerServiceImpl implements WorkerService {
             BeanUtils.copyProperties(workerCreateDto, optionalWorker, "id", "createdBy", "createdDate");
             optionalWorker.setEnterprise(enterprise);
             return modelMapper.map(workerRepository.save(optionalWorker), WorkerDto.class);
+        } catch (ResourceNotFoundException e) {
+            throw e;
         } catch (Exception e) {
             throw new DataProcessingException("Error updating the worker with ID: " + id);
         }
