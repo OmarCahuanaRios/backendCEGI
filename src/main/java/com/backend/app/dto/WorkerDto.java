@@ -11,13 +11,15 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonPropertyOrder({"id", "firstName", "lastName", "email", "enterprise", "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate"})
+@JsonPropertyOrder({"id", "firstName", "lastName", "status", "email", "enterprise", "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate"})
 public class WorkerDto extends Auditable<String> {
     private Integer id;
 
     private String firstName;
 
     private String lastName;
+
+    private Boolean status;
 
     private String email;
 

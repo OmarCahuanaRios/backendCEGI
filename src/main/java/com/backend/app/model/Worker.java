@@ -29,6 +29,8 @@ public class Worker extends Auditable<String> {
     @Column(nullable = false, unique = true)
     private String email;
 
+    private Boolean status;
+
     @ManyToOne
     @JoinColumn(name = "enterprise_id", nullable = false)
     private Enterprise enterprise;

@@ -52,6 +52,7 @@ public class WorkerServiceImpl implements WorkerService {
         } catch (ResourceNotFoundException e) {
             throw e;
         } catch (Exception e) {
+            //Throw a custom exception
             throw new DataProcessingException("Error creating the worker.");
         }
     }
@@ -69,6 +70,7 @@ public class WorkerServiceImpl implements WorkerService {
         } catch (ResourceNotFoundException e) {
             throw e;
         } catch (Exception e) {
+            //Throw a custom exception
             throw new DataProcessingException("Error updating the worker with ID: " + id);
         }
     }

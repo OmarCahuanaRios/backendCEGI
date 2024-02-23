@@ -26,13 +26,7 @@ public class Enterprise extends Auditable<String> {
     @Column(nullable = false)
     private String address;
 
-    @Column(nullable = false, unique = true)
-    private String email;
-
     @Column(name = "phone_number", nullable = false, unique = true)
     private String phoneNumber;
-
-    @Column(nullable = false)
-    private String country;
 
 }
