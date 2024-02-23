@@ -1,6 +1,6 @@
 package com.backend.app.service.impl;
 
-import com.backend.app.config.JwtService;
+import com.backend.app.config.jwt.JwtService;
 import com.backend.app.dto.create.CreateUserDto;
 import com.backend.app.dto.UserDto;
 import com.backend.app.exception.EmailExistsException;

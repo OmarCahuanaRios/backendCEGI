@@ -1,4 +1,4 @@
-package com.backend.app.config;
+package com.backend.app.config.jwt;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
