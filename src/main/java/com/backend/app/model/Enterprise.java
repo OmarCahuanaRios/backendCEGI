@@ -20,6 +20,7 @@ import java.util.UUID;
 @Audited
 @AuditTable(value = "aud_enterprises")
 public class Enterprise extends Auditable<String> {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private Integer id;
@@ -35,7 +36,7 @@ public class Enterprise extends Auditable<String> {
 
     @Column(name = "phone_number", nullable = false, unique = true)
     private String phoneNumber;
-    
+
     @Column(nullable = false)
     private String country;
 
