@@ -1,6 +1,6 @@
 package com.backend.app.controller;
 
-import com.backend.app.dto.CreateUserDto;
+import com.backend.app.dto.create.CreateUserDto;
 import com.backend.app.dto.UserDto;
 import com.backend.app.model.Role;
 import com.backend.app.model.auth.AuthenticationRequest;

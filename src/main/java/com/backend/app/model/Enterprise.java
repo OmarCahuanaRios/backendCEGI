@@ -1,13 +1,9 @@
 package com.backend.app.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
-
-import java.util.Date;
-import java.util.UUID;
 
 @Data
 @Builder
