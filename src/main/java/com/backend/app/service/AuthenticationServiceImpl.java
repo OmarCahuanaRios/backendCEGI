@@ -58,6 +58,7 @@ public class AuthenticationServiceImpl {
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         User user = repository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new EmailNotExistsException("Email Not Found"));
+        revokeAllUserTokens(user);
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
@@ -65,7 +66,6 @@ public class AuthenticationServiceImpl {
                 )
         );
         String jwtToken = jwtService.generateToken(user);
-        revokeAllUserTokens(user);
         saveUserToken(user, jwtToken);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
@@ -94,19 +94,21 @@ public class AuthenticationServiceImpl {
         tokenRepository.save(token);
     }
 
-    private void revokeAllUserTokens(User user) {
+    private boolean revokeAllUserTokens(User user) {
         List<Token> validUserTokens = tokenRepository.findAllValidTokenByUser(user.getId());
         if (validUserTokens.isEmpty())
-            return;
+            return false;
         validUserTokens.forEach(token -> {
             token.setExpired(true);
             token.setRevoked(true);
         });
         tokenRepository.saveAll(validUserTokens);
+        return true;
     }
 
     private void deleteAllUserTokens(User user) {
-        List<Token> validUserTokens = tokenRepository.findAllValidTokenByUser(user.getId());
+        List<Token> validUserTokens = tokenRepository.findAllByUser_Id(user.getId());
+        System.out.println(validUserTokens.isEmpty());
         if (validUserTokens.isEmpty())
             return;
         tokenRepository.deleteAll(validUserTokens);
