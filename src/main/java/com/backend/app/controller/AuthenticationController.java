@@ -5,7 +5,7 @@ import com.backend.app.dto.UserDto;
 import com.backend.app.model.Role;
 import com.backend.app.model.auth.AuthenticationRequest;
 import com.backend.app.model.auth.AuthenticationResponse;
-import com.backend.app.service.AuthenticationServiceImpl;
+import com.backend.app.service.impl.AuthenticationServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

@@ -1,4 +1,4 @@
-package com.backend.app.service;
+package com.backend.app.service.impl;
 
 import com.backend.app.config.JwtService;
 import com.backend.app.dto.create.CreateUserDto;
