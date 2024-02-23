@@ -11,6 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EnterpriseDto extends Auditable<String> {
+
     private Integer id;
 
     private String businessName;

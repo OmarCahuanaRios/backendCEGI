@@ -13,7 +13,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EnterpriseCreateDto {
-    private Integer id;
 
     @NotBlank(message = "Business name is required")
     @Pattern(regexp = "^[a-zA-Z ]*$", message = "Business name must be alphabetic")

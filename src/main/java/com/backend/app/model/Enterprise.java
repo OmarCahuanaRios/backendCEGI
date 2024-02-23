@@ -5,7 +5,6 @@ import lombok.*;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 
-@Data
 @Builder
 @Getter
 @Setter
@@ -18,7 +17,7 @@ import org.hibernate.envers.Audited;
 public class Enterprise extends Auditable<String> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "business_name", nullable = false, unique = true)
