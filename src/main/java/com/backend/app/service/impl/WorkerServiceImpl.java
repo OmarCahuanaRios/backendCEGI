@@ -4,7 +4,9 @@ import com.backend.app.dto.WorkerDto;
 import com.backend.app.dto.create.WorkerCreateDto;
 import com.backend.app.exception.DataProcessingException;
 import com.backend.app.exception.ResourceNotFoundException;
+import com.backend.app.model.Enterprise;
 import com.backend.app.model.Worker;
+import com.backend.app.repository.EnterpriseRepository;
 import com.backend.app.repository.WorkerRepository;
 import com.backend.app.service.WorkerService;
 import lombok.AllArgsConstructor;
@@ -19,6 +21,8 @@ import java.util.List;
 public class WorkerServiceImpl implements WorkerService {
 
     private final WorkerRepository workerRepository;
+
+    private final EnterpriseRepository enterpriseRepository;
 
     private final ModelMapper modelMapper;
 
@@ -39,8 +43,12 @@ public class WorkerServiceImpl implements WorkerService {
     @Override
     public WorkerDto createWorker(WorkerCreateDto workerCreateDto) {
         try {
-            Worker worker = workerRepository.save(modelMapper.map(workerCreateDto, Worker.class));
-            return modelMapper.map(worker, WorkerDto.class);
+            Enterprise enterprise = enterpriseRepository.findById(workerCreateDto.getEnterpriseId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Enterprise", "id", workerCreateDto.getEnterpriseId()));
+            Worker worker = new Worker();
+            BeanUtils.copyProperties(workerCreateDto, worker);
+            worker.setEnterprise(enterprise);
+            return modelMapper.map(workerRepository.save(worker), WorkerDto.class);
         } catch (Exception e) {
             throw new DataProcessingException("Error creating the worker.");
         }
@@ -49,9 +57,12 @@ public class WorkerServiceImpl implements WorkerService {
     @Override
     public WorkerDto updateWorker(Integer id, WorkerCreateDto workerCreateDto) {
         try {
+            Enterprise enterprise = enterpriseRepository.findById(workerCreateDto.getEnterpriseId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Enterprise", "id", workerCreateDto.getEnterpriseId()));
             Worker optionalWorker = workerRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Worker", "id", id));
             BeanUtils.copyProperties(workerCreateDto, optionalWorker, "id", "createdBy", "createdDate");
+            optionalWorker.setEnterprise(enterprise);
             return modelMapper.map(workerRepository.save(optionalWorker), WorkerDto.class);
         } catch (Exception e) {
             throw new DataProcessingException("Error updating the worker with ID: " + id);
