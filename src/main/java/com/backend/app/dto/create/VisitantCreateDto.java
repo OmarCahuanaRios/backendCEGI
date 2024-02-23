@@ -28,7 +28,7 @@ public class VisitantCreateDto {
     private String email;
 
     @NotBlank(message = "Document ID is required")
-    @Pattern(regexp = "^[0-9]*$", message = "Document ID must be numeric")
+    @Pattern(regexp = "^\\d*$", message = "Document ID must be numeric")
     private String documentId;
 
 }

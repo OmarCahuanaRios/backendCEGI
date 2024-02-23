@@ -32,6 +32,7 @@ public class EnterpriseServiceImpl implements EnterpriseService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public EnterpriseDto findEnterpriseById(Integer id) {
         Enterprise optionalEnterprise = enterpriseRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("enterprise", "id", id));
@@ -39,6 +40,7 @@ public class EnterpriseServiceImpl implements EnterpriseService {
     }
 
     @Override
+    @Transactional
     public EnterpriseDto createEnterprise(EnterpriseCreateDto enterpriseCreateDto) {
         try {
             Enterprise enterprise = enterpriseRepository.save(modelMapper.map(enterpriseCreateDto, Enterprise.class));
@@ -50,6 +52,7 @@ public class EnterpriseServiceImpl implements EnterpriseService {
     }
 
     @Override
+    @Transactional
     public EnterpriseDto updateEnterprise(Integer id, EnterpriseCreateDto enterpriseCreateDto) {
         try {
             Enterprise optionalEnterprise = enterpriseRepository.findById(id)
@@ -64,6 +67,7 @@ public class EnterpriseServiceImpl implements EnterpriseService {
     }
 
     @Override
+    @Transactional
     public EnterpriseDto deleteEnterprise(Integer id) {
         try {
             Enterprise optionalEnterprise = enterpriseRepository.findById(id)
