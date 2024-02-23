@@ -28,5 +28,5 @@ public class Worker {
 
     @Column(nullable = false, unique = true)
     private String email;
-    
+
 }
