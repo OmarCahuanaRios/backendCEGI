@@ -2,6 +2,7 @@ package com.backend.app.service;
 
 import com.backend.app.config.JwtService;
 import com.backend.app.dto.CreateUserDto;
+import com.backend.app.dto.UserDto;
 import com.backend.app.exception.EmailExistsException;
 import com.backend.app.exception.EmailNotExistsException;
 import com.backend.app.model.Role;
@@ -17,6 +18,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +32,7 @@ public class AuthenticationServiceImpl {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
+    @Transactional
     public AuthenticationResponse register(CreateUserDto request, Role role) {
         User user = User.builder()
                 .firstname(request.getFirstName())
@@ -51,6 +54,7 @@ public class AuthenticationServiceImpl {
                 .build();
     }
 
+    @Transactional
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         User user = repository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new EmailNotExistsException("Email Not Found"));
@@ -66,6 +70,17 @@ public class AuthenticationServiceImpl {
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .role(user.getRole())
+                .build();
+    }
+
+    @Transactional
+    public UserDto deleteUser(String email) {
+        User user = repository.findByEmail(email)
+                .orElseThrow(() -> new EmailNotExistsException("Email Not Found"));
+        deleteAllUserTokens(user);
+        repository.delete(user);
+        return UserDto.builder()
+                .email(user.getEmail())
                 .build();
     }
 
@@ -88,5 +103,12 @@ public class AuthenticationServiceImpl {
             token.setRevoked(true);
         });
         tokenRepository.saveAll(validUserTokens);
+    }
+
+    private void deleteAllUserTokens(User user) {
+        List<Token> validUserTokens = tokenRepository.findAllValidTokenByUser(user.getId());
+        if (validUserTokens.isEmpty())
+            return;
+        tokenRepository.deleteAll(validUserTokens);
     }
 }
