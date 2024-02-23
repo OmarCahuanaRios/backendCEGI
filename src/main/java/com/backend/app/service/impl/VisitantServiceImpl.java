@@ -59,6 +59,8 @@ public class VisitantServiceImpl implements VisitantService {
                     .orElseThrow(() -> new ResourceNotFoundException("Visitant", "id", id));
             BeanUtils.copyProperties(VisitantCreateDto, optionalVisitant, "id", "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate");
             return modelMapper.map(visitantRepository.save(optionalVisitant), VisitantDto.class);
+        } catch (ResourceNotFoundException e) {
+            throw e;
         } catch (Exception e) {
             //Throw a custom exception
             throw new DataProcessingException("Error updating the visitant with ID: " + id);
@@ -73,6 +75,8 @@ public class VisitantServiceImpl implements VisitantService {
                     .orElseThrow(() -> new ResourceNotFoundException("Visitant", "id", id));
             visitantRepository.deleteById(optionalVisitant.getId());
             return modelMapper.map(optionalVisitant, VisitantDto.class);
+        } catch (ResourceNotFoundException e) {
+            throw e;
         } catch (Exception e) {
             //Throw a custom exception
             throw new DataProcessingException("Error deleting the visitant with ID: " + id);
