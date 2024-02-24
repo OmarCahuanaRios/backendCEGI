@@ -41,9 +41,9 @@ public class VisitantServiceImpl implements VisitantService {
 
     @Override
     @Transactional
-    public VisitantDto createVisitant(VisitantCreateDto VisitantCreateDto) {
+    public VisitantDto createVisitant(VisitantCreateDto visitantCreateDto) {
         try {
-            Visitant visitant = visitantRepository.save(modelMapper.map(VisitantCreateDto, Visitant.class));
+            Visitant visitant = visitantRepository.save(modelMapper.map(visitantCreateDto, Visitant.class));
             return modelMapper.map(visitant, VisitantDto.class);
         } catch (Exception e) {
             //Throw a custom exception
@@ -53,11 +53,11 @@ public class VisitantServiceImpl implements VisitantService {
 
     @Override
     @Transactional
-    public VisitantDto updateVisitant(Integer id, VisitantCreateDto VisitantCreateDto) {
+    public VisitantDto updateVisitant(Integer id, VisitantCreateDto visitantCreateDto) {
         try {
             Visitant optionalVisitant = visitantRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Visitant", "id", id));
-            BeanUtils.copyProperties(VisitantCreateDto, optionalVisitant, "id", "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate");
+            BeanUtils.copyProperties(visitantCreateDto, optionalVisitant, "id", "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate");
             return modelMapper.map(visitantRepository.save(optionalVisitant), VisitantDto.class);
         } catch (ResourceNotFoundException e) {
             throw e;

@@ -11,9 +11,9 @@ public interface VisitantService {
 
     VisitantDto findVisitantById(Integer id);
 
-    VisitantDto createVisitant(VisitantCreateDto VisitantCreateDto);
+    VisitantDto createVisitant(VisitantCreateDto visitantCreateDto);
 
-    VisitantDto updateVisitant(Integer id, VisitantCreateDto VisitantCreateDto);
+    VisitantDto updateVisitant(Integer id, VisitantCreateDto visitantCreateDto);
 
     VisitantDto deleteVisitant(Integer id);
 
