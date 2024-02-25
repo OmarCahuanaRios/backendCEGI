@@ -73,6 +73,8 @@ public class VisitServiceImpl implements VisitService {
             visit.setWorker(optionalWorker);
             visit.setVisitant(optionalVisitant);
             return modelMapper.map(visitRepository.save(visit), VisitDto.class);
+        } catch (ResourceNotFoundException e) {
+            throw e;
         } catch (Exception e) {
             //Throw a custom exception
             throw new DataProcessingException("Error creating the visit.");

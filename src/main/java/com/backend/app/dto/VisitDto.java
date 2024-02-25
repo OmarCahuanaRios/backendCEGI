@@ -4,6 +4,7 @@ import com.backend.app.model.Auditable;
 import com.backend.app.model.Visitant;
 import com.backend.app.model.Worker;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,8 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonPropertyOrder({"id", "approbationDate", "appointmentDate", "hour", "approbationCode", "status", "visitType", "qrImage",
+        "qrVisitImage", "worker", "visitant", "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate"})
 public class VisitDto extends Auditable<String> {
 
     private Integer id;

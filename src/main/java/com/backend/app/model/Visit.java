@@ -38,8 +38,10 @@ public class Visit extends Auditable<String> {
     @Column(name = "visit_type", nullable = false)
     private Boolean visitType;
 
+    @Column(name = "qr_image", nullable = false, columnDefinition = "LONGTEXT")
     private String qrImage;
 
+    @Column(name = "qr_visit_image", nullable = false, columnDefinition = "LONGTEXT")
     private String qrVisitImage;
 
     @OneToOne
