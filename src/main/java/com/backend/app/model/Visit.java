@@ -38,11 +38,9 @@ public class Visit extends Auditable<String> {
     @Column(name = "visit_type", nullable = false)
     private Boolean visitType;
 
-    @Lob
-    private byte[] qrImage;
+    private String qrImage;
 
-    @Lob
-    private byte[] qrVisitImage;
+    private String qrVisitImage;
 
     @OneToOne
     private Worker worker;

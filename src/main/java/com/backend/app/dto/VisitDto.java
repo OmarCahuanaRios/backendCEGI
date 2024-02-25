@@ -33,9 +33,9 @@ public class VisitDto extends Auditable<String> {
 
     private Boolean visitType;
 
-    private byte[] qrImage;
+    private String qrImage;
 
-    private byte[] qrVisitImage;
+    private String qrVisitImage;
 
     private Worker worker;
 

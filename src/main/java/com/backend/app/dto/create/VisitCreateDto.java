@@ -33,9 +33,9 @@ public class VisitCreateDto {
     @NotBlank(message = "Visit type is mandatory")
     private Boolean visitType;
 
-    private byte[] qrImage;
+    private String qrImage;
 
-    private byte[] qrVisitImage;
+    private String qrVisitImage;
 
     private Integer workerId;
 

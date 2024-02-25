@@ -19,6 +19,7 @@
         <jjwt.version>0.11.5</jjwt.version>
         <hibernate.version>6.4.4.Final</hibernate.version>
         <spring.security>6.0.0</spring.security>
+        <google.version>3.5.3</google.version>
     </properties>
     <dependencies>
         <!-- Spring Boot Starters -->
@@ -108,6 +109,19 @@
             <artifactId>hibernate-envers</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
+
+        <!-- Google Api -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>${google.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>${google.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
