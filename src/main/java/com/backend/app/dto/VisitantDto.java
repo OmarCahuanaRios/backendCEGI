@@ -24,4 +24,6 @@ public class VisitantDto extends Auditable<String> {
 
     private String documentId;
 
+    private String documentType;
+
 }

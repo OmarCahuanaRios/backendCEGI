@@ -30,15 +30,19 @@ public class VisitDto extends Auditable<String> {
 
     private String hour;
 
-    private String approbationCode;
+    //private String approbationCode;
 
     private Boolean status;
 
     private Boolean visitType;
 
-    private String qrImage;
 
-    private String qrVisitImage;
+    //Aún no se cuenta con el scanner para la demo ,así que simularemos que el usuario
+    //colocará su correo para la creación de citas y se validará mediante el dni en el robot
+
+    //private String qrImage;
+
+    //private String qrVisitImage;
 
     private Worker worker;
 

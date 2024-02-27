@@ -31,18 +31,22 @@ public class Visit extends Auditable<String> {
 
     private String hour;
 
-    private String approbationCode;
+    //private String approbationCode;
 
     private Boolean status;
 
     @Column(name = "visit_type", nullable = false)
     private Boolean visitType;
 
-    @Column(name = "qr_image", nullable = false, columnDefinition = "LONGTEXT")
-    private String qrImage;
+    //Aún no se cuenta con el scanner para la demo ,así que simularemos que el usuario
+    //colocará su correo para la creación de citas y se validará mediante el dni en el robot
 
-    @Column(name = "qr_visit_image", nullable = false, columnDefinition = "LONGTEXT")
-    private String qrVisitImage;
+    //@Column(name = "qr_image", nullable = false, columnDefinition = "LONGTEXT")
+    //private String qrImage;
+
+
+    //@Column(name = "qr_visit_image", nullable = false, columnDefinition = "LONGTEXT")
+    //private String qrVisitImage;
 
     @OneToOne
     private Worker worker;

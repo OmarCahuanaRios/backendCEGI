@@ -59,8 +59,8 @@ public class VisitServiceImpl implements VisitService {
     @Transactional
     public VisitDto createVisit(VisitCreateDto visitCreateDto) throws IOException, WriterException {
         int imageSize = 200;
-        String firstImage = generateQrCode(visitCreateDto.getQrImage(), imageSize, imageSize);
-        String secondImage = generateQrCode(visitCreateDto.getQrVisitImage(), imageSize, imageSize);
+        //String firstImage = generateQrCode(visitCreateDto.getQrImage(), imageSize, imageSize);
+        //String secondImage = generateQrCode(visitCreateDto.getQrVisitImage(), imageSize, imageSize);
         try {
             Worker optionalWorker = workerRepository.findById(visitCreateDto.getWorkerId())
                     .orElseThrow(() -> new ResourceNotFoundException("Worker", "id", visitCreateDto.getWorkerId()));
@@ -68,8 +68,8 @@ public class VisitServiceImpl implements VisitService {
                     .orElseThrow(() -> new ResourceNotFoundException("Visitant", "id", visitCreateDto.getVisitantId()));
             Visit visit = new Visit();
             BeanUtils.copyProperties(visitCreateDto, visit);
-            visit.setQrImage(firstImage);
-            visit.setQrVisitImage(secondImage);
+            //visit.setQrImage(firstImage);
+            //visit.setQrVisitImage(secondImage);
             visit.setWorker(optionalWorker);
             visit.setVisitant(optionalVisitant);
             return modelMapper.map(visitRepository.save(visit), VisitDto.class);
@@ -85,8 +85,8 @@ public class VisitServiceImpl implements VisitService {
     @Transactional
     public VisitDto updateVisit(Integer id, VisitCreateDto visitCreateDto) throws IOException, WriterException {
         int imageSize = 200;
-        String firstImage = generateQrCode(visitCreateDto.getQrImage(), imageSize, imageSize);
-        String secondImage = generateQrCode(visitCreateDto.getQrVisitImage(), imageSize, imageSize);
+        //String firstImage = generateQrCode(visitCreateDto.getQrImage(), imageSize, imageSize);
+        //String secondImage = generateQrCode(visitCreateDto.getQrVisitImage(), imageSize, imageSize);
         try {
             Visit optionalVisit = visitRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Visit", "id", id));
@@ -95,8 +95,8 @@ public class VisitServiceImpl implements VisitService {
             Visitant optionalVisitant = visitantRepository.findById(visitCreateDto.getVisitantId())
                     .orElseThrow(() -> new ResourceNotFoundException("Visitant", "id", visitCreateDto.getVisitantId()));
             BeanUtils.copyProperties(visitCreateDto, optionalVisit, "id", "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate");
-            optionalVisit.setQrImage(firstImage);
-            optionalVisit.setQrVisitImage(secondImage);
+            //optionalVisit.setQrImage(firstImage);
+            //optionalVisit.setQrVisitImage(secondImage);
             optionalVisit.setWorker(optionalWorker);
             optionalVisit.setVisitant(optionalVisitant);
             return modelMapper.map(visitRepository.save(optionalVisit), VisitDto.class);

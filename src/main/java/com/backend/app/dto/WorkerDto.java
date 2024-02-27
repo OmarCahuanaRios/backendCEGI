@@ -23,5 +23,6 @@ public class WorkerDto extends Auditable<String> {
 
     private String email;
 
-    private EnterpriseDto enterprise;
+    private String enterprise;
+    //private EnterpriseDto enterprise;
 }

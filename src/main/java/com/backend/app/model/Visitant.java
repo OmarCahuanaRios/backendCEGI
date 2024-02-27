@@ -26,11 +26,14 @@ public class Visitant extends Auditable<String> {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(nullable = false, unique = true)
+    @Column(name= "email", nullable = false, unique = true)
     private String email;
 
     @Column(name = "document_id", nullable = false, unique = true)
     private String documentId;
+
+    @Column(name = "document_type", nullable = false, unique = true)
+    private String documentType;
 
 
 }
