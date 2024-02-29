@@ -11,6 +11,8 @@ public interface WorkerService {
 
     WorkerDto findWorkerById(Integer id);
 
+    WorkerDto findWorkerByDni(String dni);
+
     WorkerDto createWorker(WorkerCreateDto workerCreateDto);
 
     WorkerDto updateWorker(Integer id, WorkerCreateDto workerCreateDto);

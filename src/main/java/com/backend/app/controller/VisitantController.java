@@ -31,6 +31,12 @@ public class VisitantController {
         return new ResponseEntity<>(visitant, HttpStatus.OK);
     }
 
+    @GetMapping("/dni/{dni}")
+    public ResponseEntity<VisitantDto> getVisitantByDocument(@PathVariable String dni) {
+        VisitantDto visitant = visitantService.findVisitantByDocument(dni);
+        return new ResponseEntity<>(visitant, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<VisitantDto> createVisitant(@RequestBody @Valid VisitantCreateDto visitantDto) {
         VisitantDto visitant = visitantService.createVisitant(visitantDto);

@@ -31,6 +31,12 @@ public class WorkerController {
         return new ResponseEntity<>(worker, HttpStatus.OK);
     }
 
+    @GetMapping("/dni/{dni}")
+    public ResponseEntity<WorkerDto> getWorkerByDni(@PathVariable String dni) {
+        WorkerDto worker = workerService.findWorkerByDni(dni);
+        return new ResponseEntity<>(worker, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<WorkerDto> createWorker(@RequestBody @Valid WorkerCreateDto workerDto) {
         WorkerDto worker = workerService.createWorker(workerDto);

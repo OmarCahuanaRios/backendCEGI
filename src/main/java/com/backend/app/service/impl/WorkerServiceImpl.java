@@ -44,11 +44,18 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     @Override
+    public WorkerDto findWorkerByDni(String dni) {
+        Worker optionalWorker = workerRepository.findByDocumentId(dni)
+                .orElseThrow(() -> new ResourceNotFoundException("Worker", "dni", dni));
+        return modelMapper.map(optionalWorker, WorkerDto.class);
+    }
+
+    @Override
     @Transactional
     public WorkerDto createWorker(WorkerCreateDto workerCreateDto) {
         try {
             //Enterprise enterprise = enterpriseRepository.findById(workerCreateDto.getEnterpriseId())
-                    //.orElseThrow(() -> new ResourceNotFoundException("Enterprise", "id", workerCreateDto.getEnterpriseId()));
+            //.orElseThrow(() -> new ResourceNotFoundException("Enterprise", "id", workerCreateDto.getEnterpriseId()));
             Worker worker = new Worker();
             BeanUtils.copyProperties(workerCreateDto, worker);
             //worker.setEnterprise(enterprise);
@@ -66,7 +73,7 @@ public class WorkerServiceImpl implements WorkerService {
     public WorkerDto updateWorker(Integer id, WorkerCreateDto workerCreateDto) {
         try {
             //Enterprise enterprise = enterpriseRepository.findById(workerCreateDto.getEnterpriseId())
-                   // .orElseThrow(() -> new ResourceNotFoundException("Enterprise", "id", workerCreateDto.getEnterpriseId()));
+            // .orElseThrow(() -> new ResourceNotFoundException("Enterprise", "id", workerCreateDto.getEnterpriseId()));
             Worker optionalWorker = workerRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Worker", "id", id));
             BeanUtils.copyProperties(workerCreateDto, optionalWorker, "id", "createdBy", "createdDate");

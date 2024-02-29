@@ -11,6 +11,8 @@ public interface VisitantService {
 
     VisitantDto findVisitantById(Integer id);
 
+    VisitantDto findVisitantByDocument(String dni);
+
     VisitantDto createVisitant(VisitantCreateDto visitantCreateDto);
 
     VisitantDto updateVisitant(Integer id, VisitantCreateDto visitantCreateDto);

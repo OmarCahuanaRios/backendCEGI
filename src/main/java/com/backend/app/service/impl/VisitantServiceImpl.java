@@ -40,6 +40,13 @@ public class VisitantServiceImpl implements VisitantService {
     }
 
     @Override
+    public VisitantDto findVisitantByDocument(String dni) {
+        Visitant optionalVisitant = visitantRepository.findByDocumentId(dni)
+                .orElseThrow(() -> new ResourceNotFoundException("Visitant", "document", dni));
+        return modelMapper.map(optionalVisitant, VisitantDto.class);
+    }
+
+    @Override
     @Transactional
     public VisitantDto createVisitant(VisitantCreateDto visitantCreateDto) {
         try {
