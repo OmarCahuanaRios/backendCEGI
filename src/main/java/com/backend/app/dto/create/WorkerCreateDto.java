@@ -1,9 +1,6 @@
 package com.backend.app.dto.create;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,4 +28,14 @@ public class WorkerCreateDto {
     private String email;
 
     @NotNull(message = "Enterprise name is required")
-    private String enterprise;}
+    private String enterprise;
+
+    @NotBlank(message = "Document ID is required")
+    @Pattern(regexp = "^\\d*$", message = "Document ID must be numeric")
+    @Size(min = 8, max = 8, message = "Document ID must be 8 digits long")
+    private String documentId;
+
+
+}
+
+

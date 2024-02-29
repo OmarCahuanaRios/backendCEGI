@@ -36,4 +36,7 @@ public class Worker extends Auditable<String> {
     @Column(name="enterprise", nullable = false)
     private String enterprise;
 
+    @Column(name = "document_id", nullable = false, unique = true)
+    private String documentId;
+
 }
