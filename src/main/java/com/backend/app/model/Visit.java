@@ -2,6 +2,7 @@ package com.backend.app.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
@@ -38,6 +39,9 @@ public class Visit extends Auditable<String> {
     @Column(name = "visit_type", nullable = false)
     private Boolean visitType;
 
+
+    private String enterprise;
+
     //Aún no se cuenta con el scanner para la demo ,así que simularemos que el usuario
     //colocará su correo para la creación de citas y se validará mediante el dni en el robot
 
@@ -48,10 +52,10 @@ public class Visit extends Auditable<String> {
     //@Column(name = "qr_visit_image", nullable = false, columnDefinition = "LONGTEXT")
     //private String qrVisitImage;
 
-    @OneToOne
+    @ManyToOne
     private Worker worker;
 
-    @OneToOne
+    @ManyToOne
     private Visitant visitant;
 
 }

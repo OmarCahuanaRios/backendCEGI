@@ -73,7 +73,7 @@ public class EnterpriseServiceImpl implements EnterpriseService {
             Enterprise optionalEnterprise = enterpriseRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Enterprise", "id", id));
 
-            enterpriseRepository.deleteById(optionalEnterprise.getId());
+            //enterpriseRepository.deleteById(optionalEnterprise.getId());
             return modelMapper.map(optionalEnterprise, EnterpriseDto.class);
         } catch (Exception e) {
             //Throw a custom exception

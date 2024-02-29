@@ -31,8 +31,9 @@ public class Worker extends Auditable<String> {
 
     private Boolean status;
 
-    @ManyToOne
-    @JoinColumn(name = "enterprise_id", nullable = false)
-    private Enterprise enterprise;
+    //@ManyToOne
+    //@JoinColumn(name = "enterprise_id", nullable = false)
+    @Column(name="enterprise", nullable = false)
+    private String enterprise;
 
 }

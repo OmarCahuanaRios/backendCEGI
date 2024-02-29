@@ -5,6 +5,7 @@ import com.backend.app.model.Visitant;
 import com.backend.app.model.Worker;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,9 @@ public class VisitDto extends Auditable<String> {
     private Date appointmentDate;
 
     private String hour;
+
+
+    private String enterprise;
 
     //private String approbationCode;
 

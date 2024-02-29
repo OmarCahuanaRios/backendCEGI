@@ -27,6 +27,10 @@ public class VisitCreateDto {
     @NotBlank(message = "Hour is mandatory")
     private String hour;
 
+
+    @NotBlank(message = "Enterprise is mandatory")
+    private String enterprise;
+
     //@NotBlank(message = "Approbation code is mandatory")
     //private String approbationCode;
 
@@ -44,7 +48,7 @@ public class VisitCreateDto {
     @NotBlank(message = "QR visit image is mandatory")
     private String qrVisitImage;*/
 
-    @NotNull(message = "Worker id is mandatory")
+
     private Integer workerId;
 
     @NotNull(message = "Visitant id is mandatory")

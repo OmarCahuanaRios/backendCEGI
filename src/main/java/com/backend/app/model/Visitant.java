@@ -32,7 +32,7 @@ public class Visitant extends Auditable<String> {
     @Column(name = "document_id", nullable = false, unique = true)
     private String documentId;
 
-    @Column(name = "document_type", nullable = false, unique = true)
+    @Column(name = "document_type", nullable = false)
     private String documentType;
 
 

@@ -30,6 +30,5 @@ public class WorkerCreateDto {
     @Email
     private String email;
 
-    @NotNull(message = "Enterprise id is required")
-    private Integer enterpriseId;
-}
+    @NotNull(message = "Enterprise name is required")
+    private String enterprise;}
