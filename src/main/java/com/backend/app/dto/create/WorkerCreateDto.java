@@ -19,8 +19,7 @@ public class WorkerCreateDto {
     @NotBlank(message = "Last name is required")
     @Pattern(regexp = "^[a-zA-Z ]*$", message = "Last name must be alphabetic")
     private String lastName;
-
-    @NotNull(message = "Status is required")
+    
     private Boolean status;
 
     @NotBlank(message = "Email is required")

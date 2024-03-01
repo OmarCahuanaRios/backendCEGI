@@ -54,6 +54,7 @@ public class WorkerServiceImpl implements WorkerService {
     @Transactional
     public WorkerDto createWorker(WorkerCreateDto workerCreateDto) {
         try {
+            workerCreateDto.setStatus(true);
             Worker worker = workerRepository.save(modelMapper.map(workerCreateDto, Worker.class));
             return modelMapper.map(workerRepository.save(worker), WorkerDto.class);
         } catch (ResourceNotFoundException e) {
