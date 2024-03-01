@@ -35,6 +35,8 @@ public class WorkerCreateDto {
     @Size(min = 8, max = 8, message = "Document ID must be 8 digits long")
     private String documentId;
 
+    @NotBlank(message = "Document type is required")
+    private String documentType;
 
 }
 

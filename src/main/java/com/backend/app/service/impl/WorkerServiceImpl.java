@@ -54,11 +54,7 @@ public class WorkerServiceImpl implements WorkerService {
     @Transactional
     public WorkerDto createWorker(WorkerCreateDto workerCreateDto) {
         try {
-            //Enterprise enterprise = enterpriseRepository.findById(workerCreateDto.getEnterpriseId())
-            //.orElseThrow(() -> new ResourceNotFoundException("Enterprise", "id", workerCreateDto.getEnterpriseId()));
-            Worker worker = new Worker();
-            BeanUtils.copyProperties(workerCreateDto, worker);
-            //worker.setEnterprise(enterprise);
+            Worker worker = workerRepository.save(modelMapper.map(workerCreateDto, Worker.class));
             return modelMapper.map(workerRepository.save(worker), WorkerDto.class);
         } catch (ResourceNotFoundException e) {
             throw e;

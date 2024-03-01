@@ -32,6 +32,4 @@ public class VisitantCreateDto {
     @NotBlank(message = "Document type is required")
     private String documentType;
 
-    ;
-
 }

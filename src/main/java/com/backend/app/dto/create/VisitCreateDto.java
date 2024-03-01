@@ -48,7 +48,6 @@ public class VisitCreateDto {
     @NotBlank(message = "QR visit image is mandatory")
     private String qrVisitImage;*/
 
-
     private Integer workerId;
 
     @NotNull(message = "Visitant id is mandatory")
