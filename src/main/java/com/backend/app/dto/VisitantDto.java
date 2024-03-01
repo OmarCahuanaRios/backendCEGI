@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonPropertyOrder({"id", "firstName", "lastName", "email", "documentId", "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate"})
+@JsonPropertyOrder({"id", "firstName", "lastName", "email", "documentId", "documentType", "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate"})
 public class VisitantDto extends Auditable<String> {
 
     private Integer id;

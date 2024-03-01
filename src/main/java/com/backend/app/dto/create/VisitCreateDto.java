@@ -3,6 +3,7 @@ package com.backend.app.dto.create;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Null;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -47,7 +48,6 @@ public class VisitCreateDto {
 
     @NotBlank(message = "QR visit image is mandatory")
     private String qrVisitImage;*/
-
     private Integer workerId;
 
     @NotNull(message = "Visitant id is mandatory")

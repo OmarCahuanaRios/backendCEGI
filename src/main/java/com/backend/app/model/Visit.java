@@ -53,6 +53,7 @@ public class Visit extends Auditable<String> {
     //private String qrVisitImage;
 
     @ManyToOne
+    @JoinColumn(name = "worker_id")
     private Worker worker;
 
     @ManyToOne

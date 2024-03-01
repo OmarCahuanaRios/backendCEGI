@@ -17,7 +17,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonPropertyOrder({"id", "approbationDate", "appointmentDate", "hour", "approbationCode", "status", "visitType", "qrImage",
+@JsonPropertyOrder({"id", "approbationDate", "appointmentDate", "hour", "approbationCode", "status", "visitType", "qrImage", "enterprise",
         "qrVisitImage", "worker", "visitant", "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate"})
 public class VisitDto extends Auditable<String> {
 
@@ -39,7 +39,6 @@ public class VisitDto extends Auditable<String> {
     private Boolean status;
 
     private Boolean visitType;
-
 
     //Aún no se cuenta con el scanner para la demo ,así que simularemos que el usuario
     //colocará su correo para la creación de citas y se validará mediante el dni en el robot
