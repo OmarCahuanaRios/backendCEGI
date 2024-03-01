@@ -36,7 +36,7 @@ public class VisitCreateDto {
     //private String approbationCode;
 
     @NotNull(message = "Status is mandatory")
-    private Boolean status;
+    private String status;
 
     @NotNull(message = "Visit type is mandatory")
     private Boolean visitType;

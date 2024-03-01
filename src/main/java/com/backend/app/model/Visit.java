@@ -34,7 +34,7 @@ public class Visit extends Auditable<String> {
 
     //private String approbationCode;
 
-    private Boolean status;
+    private String status;
 
     @Column(name = "visit_type", nullable = false)
     private Boolean visitType;

@@ -36,7 +36,7 @@ public class VisitDto extends Auditable<String> {
 
     //private String approbationCode;
 
-    private Boolean status;
+    private String status;
 
     private Boolean visitType;
 
