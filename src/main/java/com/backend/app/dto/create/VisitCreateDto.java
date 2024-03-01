@@ -18,7 +18,6 @@ import java.util.Date;
 public class VisitCreateDto {
 
     @JsonFormat(pattern = "dd-MM-yyyy")
-    @NotNull(message = "Approbation date is mandatory")
     private Date approbationDate;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
@@ -49,8 +48,7 @@ public class VisitCreateDto {
     @NotBlank(message = "QR visit image is mandatory")
     private String qrVisitImage;*/
     private Integer workerId;
-
-    @NotNull(message = "Visitant id is mandatory")
+    
     private Integer visitantId;
 
 }

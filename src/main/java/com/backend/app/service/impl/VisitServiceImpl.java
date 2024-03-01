@@ -68,14 +68,18 @@ public class VisitServiceImpl implements VisitService {
                 Optional<Worker> optionalWorker = workerRepository.findById(visitCreateDto.getWorkerId());
                 worker = optionalWorker.orElseThrow(() -> new ResourceNotFoundException("Worker", "id", visitCreateDto.getWorkerId()));
             }
-            Visitant optionalVisitant = visitantRepository.findById(visitCreateDto.getVisitantId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Visitant", "id", visitCreateDto.getVisitantId()));
+            Visitant visitant = null;
+            if (visitCreateDto.getVisitantId() != null) {
+                Optional<Visitant> optionalVisitant = visitantRepository.findById(visitCreateDto.getVisitantId());
+                visitant = optionalVisitant.orElseThrow(() -> new ResourceNotFoundException("Visitant", "id", visitCreateDto.getVisitantId()));
+            }
             Visit visit = new Visit();
             BeanUtils.copyProperties(visitCreateDto, visit);
             //visit.setQrImage(firstImage);
             //visit.setQrVisitImage(secondImage);
+            visit.setApprobationDate(null);
             visit.setWorker(worker);
-            visit.setVisitant(optionalVisitant);
+            visit.setVisitant(visitant);
             return modelMapper.map(visitRepository.save(visit), VisitDto.class);
         } catch (ResourceNotFoundException e) {
             throw e;
@@ -97,15 +101,18 @@ public class VisitServiceImpl implements VisitService {
                 Optional<Worker> optionalWorker = workerRepository.findById(visitCreateDto.getWorkerId());
                 worker = optionalWorker.orElseThrow(() -> new ResourceNotFoundException("Worker", "id", visitCreateDto.getWorkerId()));
             }
+            Visitant visitant = null;
+            if (visitCreateDto.getVisitantId() != null) {
+                Optional<Visitant> optionalVisitant = visitantRepository.findById(visitCreateDto.getVisitantId());
+                visitant = optionalVisitant.orElseThrow(() -> new ResourceNotFoundException("Visitant", "id", visitCreateDto.getVisitantId()));
+            }
             Visit optionalVisit = visitRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Visit", "id", id));
-            Visitant optionalVisitant = visitantRepository.findById(visitCreateDto.getVisitantId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Visitant", "id", visitCreateDto.getVisitantId()));
             BeanUtils.copyProperties(visitCreateDto, optionalVisit, "id", "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate");
             //optionalVisit.setQrImage(firstImage);
             //optionalVisit.setQrVisitImage(secondImage);
             optionalVisit.setWorker(worker);
-            optionalVisit.setVisitant(optionalVisitant);
+            optionalVisit.setVisitant(visitant);
             return modelMapper.map(visitRepository.save(optionalVisit), VisitDto.class);
         } catch (ResourceNotFoundException e) {
             throw e;
