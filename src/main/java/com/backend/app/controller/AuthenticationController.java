@@ -23,7 +23,6 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register/role/{role}")
-    @PreAuthorize("hasRole('SUPER_ADMIN')")
     public ResponseEntity<AuthenticationResponse> register(@RequestBody @Valid CreateUserDto request, @PathVariable Role role) {
         return ResponseEntity.ok(service.register(request, role));
     }
@@ -34,7 +33,7 @@ public class AuthenticationController {
     }
 
     @DeleteMapping("/delete/{email}")
-    @PreAuthorize("hasRole('SUPER_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<UserDto> delete(@PathVariable String email) {
         return ResponseEntity.ok(service.deleteUser(email));
     }
