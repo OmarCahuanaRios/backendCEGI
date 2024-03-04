@@ -11,7 +11,7 @@ import org.hibernate.envers.Audited;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "workers")
+@Table(name = "gotworkers")
 @Audited
 @AuditTable(value = "aud_worker")
 public class Worker extends Auditable<String> {
@@ -41,5 +41,8 @@ public class Worker extends Auditable<String> {
 
     @Column(name = "document_type", nullable = false)
     private String documentType;
+
+    @Column(name = "area", nullable = false)
+    private String area;
 
 }

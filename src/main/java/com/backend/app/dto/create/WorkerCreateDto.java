@@ -37,6 +37,8 @@ public class WorkerCreateDto {
     @NotBlank(message = "Document type is required")
     private String documentType;
 
+    private String area;
+
 }
 
 

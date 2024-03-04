@@ -31,5 +31,6 @@ public class WorkerDto extends Auditable<String> {
 
     private String documentType;
 
+    private String area;
     //private EnterpriseDto enterprise;
 }
