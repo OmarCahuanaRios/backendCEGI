@@ -30,27 +30,16 @@ public class Visit extends Auditable<String> {
     @JsonFormat(pattern = "dd-MM-yyyy")
     private Date appointmentDate;
 
-    private String hour;
-
-    //private String approbationCode;
+    private String appointmentHour;
 
     private String status;
 
     @Column(name = "visit_type", nullable = false)
     private Boolean visitType;
 
-
-    private String enterprise;
-
-    //Aún no se cuenta con el scanner para la demo ,así que simularemos que el usuario
-    //colocará su correo para la creación de citas y se validará mediante el dni en el robot
-
-    //@Column(name = "qr_image", nullable = false, columnDefinition = "LONGTEXT")
-    //private String qrImage;
-
-
-    //@Column(name = "qr_visit_image", nullable = false, columnDefinition = "LONGTEXT")
-    //private String qrVisitImage;
+    @ManyToOne
+    @JoinColumn(name = "enterprise_id")
+    private Enterprise enterprise;
 
     @ManyToOne
     @JoinColumn(name = "worker_id")

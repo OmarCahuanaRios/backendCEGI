@@ -43,6 +43,7 @@ public class EnterpriseServiceImpl implements EnterpriseService {
     @Transactional
     public EnterpriseDto createEnterprise(EnterpriseCreateDto enterpriseCreateDto) {
         try {
+            enterpriseCreateDto.setWorkersNumber(0);
             Enterprise enterprise = enterpriseRepository.save(modelMapper.map(enterpriseCreateDto, Enterprise.class));
             return modelMapper.map(enterprise, EnterpriseDto.class);
         } catch (Exception e) {
@@ -73,7 +74,7 @@ public class EnterpriseServiceImpl implements EnterpriseService {
             Enterprise optionalEnterprise = enterpriseRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Enterprise", "id", id));
 
-            //enterpriseRepository.deleteById(optionalEnterprise.getId());
+            enterpriseRepository.deleteById(optionalEnterprise.getId());
             return modelMapper.map(optionalEnterprise, EnterpriseDto.class);
         } catch (Exception e) {
             //Throw a custom exception

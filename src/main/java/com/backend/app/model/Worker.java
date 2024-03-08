@@ -11,7 +11,7 @@ import org.hibernate.envers.Audited;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "gotworkers")
+@Table(name = "workers")
 @Audited
 @AuditTable(value = "aud_worker")
 public class Worker extends Auditable<String> {
@@ -31,10 +31,9 @@ public class Worker extends Auditable<String> {
 
     private Boolean status;
 
-    //@ManyToOne
-    //@JoinColumn(name = "enterprise_id", nullable = false)
-    @Column(name="enterprise", nullable = false)
-    private String enterprise;
+    @ManyToOne
+    @JoinColumn(name = "enterprise_id", nullable = false)
+    private Enterprise enterprise;
 
     @Column(name = "document_id", nullable = false, unique = true)
     private String documentId;

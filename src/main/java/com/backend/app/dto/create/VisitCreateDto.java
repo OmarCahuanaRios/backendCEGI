@@ -25,14 +25,7 @@ public class VisitCreateDto {
     private Date appointmentDate;
 
     @NotBlank(message = "Hour is mandatory")
-    private String hour;
-
-
-    @NotBlank(message = "Enterprise is mandatory")
-    private String enterprise;
-
-    //@NotBlank(message = "Approbation code is mandatory")
-    //private String approbationCode;
+    private String appointmentHour;
 
     @NotNull(message = "Status is mandatory")
     private String status;
@@ -40,15 +33,12 @@ public class VisitCreateDto {
     @NotNull(message = "Visit type is mandatory")
     private Boolean visitType;
 
-    //Aún no se cuenta con el scanner para la demo ,así que simularemos que el usuario
-    //colocará su correo para la creación de citas y se validará mediante el dni en el robot
-    /*@NotBlank(message = "QR image is mandatory")
-    private String qrImage;
-
-    @NotBlank(message = "QR visit image is mandatory")
-    private String qrVisitImage;*/
     private Integer workerId;
 
+    @NotNull(message = "Visitant Id is mandatory")
     private Integer visitantId;
+
+    @NotNull(message = "Enterprise Id is mandatory")
+    private Integer enterpriseId;
 
 }

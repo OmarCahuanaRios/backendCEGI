@@ -20,13 +20,16 @@ public class Enterprise extends Auditable<String> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "business_name", nullable = false, unique = true)
-    private String businessName;
+    @Column(name = "enterprise_name", nullable = false, unique = true)
+    private String enterpriseName;
 
-    @Column(nullable = false)
-    private String address;
+    @Column(nullable = false, name = "workers_number")
+    private Integer workersNumber;
 
     @Column(name = "phone_number", nullable = false, unique = true)
     private String phoneNumber;
+
+    @Column(nullable = false, name = "office_number")
+    private String officeNumber;
 
 }

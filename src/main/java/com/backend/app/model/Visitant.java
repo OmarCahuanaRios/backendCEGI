@@ -35,5 +35,7 @@ public class Visitant extends Auditable<String> {
     @Column(name = "document_type", nullable = false)
     private String documentType;
 
-
+    @ManyToOne
+    @JoinColumn(name = "enterprise_id", nullable = false)
+    private Enterprise enterprise;
 }

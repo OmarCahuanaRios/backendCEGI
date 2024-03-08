@@ -55,7 +55,11 @@ public class WorkerServiceImpl implements WorkerService {
     public WorkerDto createWorker(WorkerCreateDto workerCreateDto) {
         try {
             workerCreateDto.setStatus(true);
-            Worker worker = workerRepository.save(modelMapper.map(workerCreateDto, Worker.class));
+            Enterprise enterprise = enterpriseRepository.findById(workerCreateDto.getEnterpriseId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Enterprise", "id", workerCreateDto.getEnterpriseId()));
+            Worker worker = new Worker();
+            BeanUtils.copyProperties(workerCreateDto, worker);
+            worker.setEnterprise(enterprise);
             return modelMapper.map(workerRepository.save(worker), WorkerDto.class);
         } catch (ResourceNotFoundException e) {
             throw e;
@@ -69,12 +73,12 @@ public class WorkerServiceImpl implements WorkerService {
     @Transactional
     public WorkerDto updateWorker(Integer id, WorkerCreateDto workerCreateDto) {
         try {
-            //Enterprise enterprise = enterpriseRepository.findById(workerCreateDto.getEnterpriseId())
-            // .orElseThrow(() -> new ResourceNotFoundException("Enterprise", "id", workerCreateDto.getEnterpriseId()));
+            Enterprise enterprise = enterpriseRepository.findById(workerCreateDto.getEnterpriseId())
+             .orElseThrow(() -> new ResourceNotFoundException("Enterprise", "id", workerCreateDto.getEnterpriseId()));
             Worker optionalWorker = workerRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Worker", "id", id));
             BeanUtils.copyProperties(workerCreateDto, optionalWorker, "id", "createdBy", "createdDate");
-            //optionalWorker.setEnterprise(enterprise);
+            optionalWorker.setEnterprise(enterprise);
             return modelMapper.map(workerRepository.save(optionalWorker), WorkerDto.class);
         } catch (ResourceNotFoundException e) {
             throw e;

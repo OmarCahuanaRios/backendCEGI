@@ -1,6 +1,7 @@
 package com.backend.app.dto;
 
 import com.backend.app.model.Auditable;
+import com.backend.app.model.Enterprise;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,5 +26,7 @@ public class VisitantDto extends Auditable<String> {
     private String documentId;
 
     private String documentType;
+
+    private Enterprise enterprise;
 
 }

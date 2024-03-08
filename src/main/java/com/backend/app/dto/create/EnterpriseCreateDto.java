@@ -13,15 +13,17 @@ import lombok.Setter;
 @NoArgsConstructor
 public class EnterpriseCreateDto {
 
-    @NotBlank(message = "Business name is required")
+    @NotBlank(message = "Enterprise name is required")
     @Pattern(regexp = "^[a-zA-Z ]*$", message = "Business name must be alphabetic")
-    private String businessName;
+    private String enterpriseName;
 
-    @NotBlank(message = "Address is required")
-    private String address;
+    @NotBlank(message = "Office number is required")
+    private String officeNumber;
 
     @NotBlank(message = "Phone number is required")
     @Pattern(regexp = "^\\d{9}$", message = "Phone number must be 9 digits")
     private String phoneNumber;
+
+    private Integer workersNumber;
 
 }

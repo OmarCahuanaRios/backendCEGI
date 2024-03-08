@@ -26,9 +26,6 @@ public class WorkerCreateDto {
     @Email
     private String email;
 
-    @NotNull(message = "Enterprise name is required")
-    private String enterprise;
-
     @NotBlank(message = "Document ID is required")
     @Pattern(regexp = "^\\d*$", message = "Document ID must be numeric")
     @Size(min = 8, max = 8, message = "Document ID must be 8 digits long")
@@ -38,6 +35,9 @@ public class WorkerCreateDto {
     private String documentType;
 
     private String area;
+
+    @NotNull(message = "Enterprise Id is mandatory")
+    private Integer enterpriseId;
 
 }
 

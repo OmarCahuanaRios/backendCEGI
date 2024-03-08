@@ -16,10 +16,12 @@ public class EnterpriseDto extends Auditable<String> {
 
     private Integer id;
 
-    private String businessName;
+    private String enterpriseName;
 
-    private String address;
+    private String officeNumber;
 
     private String phoneNumber;
+
+    private Integer workersNumber;
 
 }

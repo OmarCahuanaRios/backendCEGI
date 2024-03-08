@@ -32,4 +32,7 @@ public class VisitantCreateDto {
     @NotBlank(message = "Document type is required")
     private String documentType;
 
+    @NotBlank(message = "Enterprise ID is mandatory")
+    private Integer enterpriseId;
+
 }

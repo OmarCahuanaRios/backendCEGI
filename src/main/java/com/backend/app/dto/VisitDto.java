@@ -1,6 +1,7 @@
 package com.backend.app.dto;
 
 import com.backend.app.model.Auditable;
+import com.backend.app.model.Enterprise;
 import com.backend.app.model.Visitant;
 import com.backend.app.model.Worker;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -29,26 +30,15 @@ public class VisitDto extends Auditable<String> {
     @JsonFormat(pattern = "dd-MM-yyyy")
     private Date appointmentDate;
 
-    private String hour;
-
-
-    private String enterprise;
-
-    //private String approbationCode;
+    private String appointmentHour;
 
     private String status;
 
     private Boolean visitType;
 
-    //Aún no se cuenta con el scanner para la demo ,así que simularemos que el usuario
-    //colocará su correo para la creación de citas y se validará mediante el dni en el robot
-
-    //private String qrImage;
-
-    //private String qrVisitImage;
-
     private Worker worker;
 
     private Visitant visitant;
 
+    private Enterprise enterprise;
 }

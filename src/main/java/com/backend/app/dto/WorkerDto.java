@@ -1,6 +1,7 @@
 package com.backend.app.dto;
 
 import com.backend.app.model.Auditable;
+import com.backend.app.model.Enterprise;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -25,12 +26,11 @@ public class WorkerDto extends Auditable<String> {
 
     private String email;
 
-    private String enterprise;
-
     private String documentId;
 
     private String documentType;
 
     private String area;
-    //private EnterpriseDto enterprise;
+
+    private Enterprise enterprise;
 }
