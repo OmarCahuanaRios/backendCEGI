@@ -4,7 +4,9 @@ import com.backend.app.dto.VisitantDto;
 import com.backend.app.dto.create.VisitantCreateDto;
 import com.backend.app.exception.DataProcessingException;
 import com.backend.app.exception.ResourceNotFoundException;
+import com.backend.app.model.Enterprise;
 import com.backend.app.model.Visitant;
+import com.backend.app.repository.EnterpriseRepository;
 import com.backend.app.repository.VisitantRepository;
 import com.backend.app.service.VisitantService;
 import lombok.AllArgsConstructor;
@@ -20,6 +22,8 @@ import java.util.List;
 public class VisitantServiceImpl implements VisitantService {
 
     private final VisitantRepository visitantRepository;
+
+    private final EnterpriseRepository enterpriseRepository;
 
     private final ModelMapper modelMapper;
 
@@ -50,8 +54,12 @@ public class VisitantServiceImpl implements VisitantService {
     @Transactional
     public VisitantDto createVisitant(VisitantCreateDto visitantCreateDto) {
         try {
-            Visitant visitant = visitantRepository.save(modelMapper.map(visitantCreateDto, Visitant.class));
-            return modelMapper.map(visitant, VisitantDto.class);
+            Enterprise enterprise = enterpriseRepository.findById(visitantCreateDto.getEnterpriseId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Enterprise", "id", visitantCreateDto.getEnterpriseId()));
+            Visitant visitant = new Visitant();
+            BeanUtils.copyProperties(visitantCreateDto, visitant);
+            visitant.setEnterprise(enterprise);
+            return modelMapper.map(visitantRepository.save(visitant), VisitantDto.class);
         } catch (Exception e) {
             //Throw a custom exception
             throw new DataProcessingException("Error creating the visitant.");
