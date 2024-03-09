@@ -1,7 +1,9 @@
 package com.backend.app.controller;
 
 import com.backend.app.dto.VisitDto;
+import com.backend.app.dto.WorkerDto;
 import com.backend.app.dto.create.VisitCreateDto;
+import com.backend.app.repository.VisitRepository;
 import com.backend.app.service.VisitService;
 import com.google.zxing.WriterException;
 import jakarta.validation.Valid;
@@ -31,6 +33,12 @@ public class VisitController {
     public ResponseEntity<VisitDto> findVisitById(@PathVariable Integer id) {
         VisitDto visit = visitService.findVisitById(id);
         return new ResponseEntity<>(visit, HttpStatus.OK);
+    }
+
+    @GetMapping("/enterprise/{enterpriseName}")
+    public ResponseEntity<List<VisitDto>> getAllVisitsByEnterprise(@PathVariable String enterpriseName){
+        List<VisitDto> visitList = visitService.findAllVisitsByEnterprise(enterpriseName);
+        return new ResponseEntity<>(visitList, HttpStatus.OK);
     }
 
     @PostMapping

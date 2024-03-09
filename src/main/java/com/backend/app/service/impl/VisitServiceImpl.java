@@ -1,6 +1,7 @@
 package com.backend.app.service.impl;
 
 import com.backend.app.dto.VisitDto;
+import com.backend.app.dto.WorkerDto;
 import com.backend.app.dto.create.VisitCreateDto;
 import com.backend.app.exception.DataProcessingException;
 import com.backend.app.exception.ResourceNotFoundException;
@@ -54,6 +55,20 @@ public class VisitServiceImpl implements VisitService {
         Visit optionalVisit = visitRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Visit", "id", id));
         return modelMapper.map(optionalVisit, VisitDto.class);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<VisitDto> findAllVisitsByEnterprise(String enterpriseName){
+
+
+        List<Visit> visits = visitRepository.findAllByEnterprise_EnterpriseName(enterpriseName);
+        if (visits == null || visits.isEmpty()) {
+            throw new ResourceNotFoundException("Visits", "enterpriseName", enterpriseName);
+        }
+        return visits.stream()
+                .map(visit -> modelMapper.map(visit, VisitDto.class))
+                .toList();
     }
 
     @Override

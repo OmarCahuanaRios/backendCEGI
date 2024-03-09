@@ -1,11 +1,14 @@
 package com.backend.app.dto;
 
 import com.backend.app.model.Auditable;
+import com.backend.app.model.Worker;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,6 +25,8 @@ public class EnterpriseDto extends Auditable<String> {
 
     private String phoneNumber;
 
-    private Integer workersNumber;
+    private int workersNumber;
+
+    private List<Worker> workerList;
 
 }

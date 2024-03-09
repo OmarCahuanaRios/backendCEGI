@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -31,6 +32,20 @@ public class WorkerServiceImpl implements WorkerService {
     @Transactional(readOnly = true)
     public List<WorkerDto> findAllWorkers() {
         return workerRepository.findAll().stream()
+                .map(worker -> modelMapper.map(worker, WorkerDto.class))
+                .toList();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<WorkerDto> findAllWorkersByEnterprise(String enterpriseName){
+
+
+        List<Worker> workers = workerRepository.findAllByEnterprise_EnterpriseName(enterpriseName);
+        if (workers == null || workers.isEmpty()) {
+            throw new ResourceNotFoundException("Workers", "enterpriseName", enterpriseName);
+        }
+        return workers.stream()
                 .map(worker -> modelMapper.map(worker, WorkerDto.class))
                 .toList();
     }

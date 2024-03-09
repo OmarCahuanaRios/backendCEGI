@@ -5,6 +5,7 @@ import com.backend.app.dto.create.WorkerCreateDto;
 import com.backend.app.service.WorkerService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.hibernate.jdbc.Work;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,12 @@ public class WorkerController {
     @GetMapping
     public ResponseEntity<List<WorkerDto>> getAllWorkers() {
         List<WorkerDto> workerList = workerService.findAllWorkers();
+        return new ResponseEntity<>(workerList, HttpStatus.OK);
+    }
+
+    @GetMapping("/enterprise/{enterpriseName}")
+    public ResponseEntity<List<WorkerDto>> getAllWorkersByEnterprise(@PathVariable String enterpriseName){
+        List<WorkerDto> workerList = workerService.findAllWorkersByEnterprise(enterpriseName);
         return new ResponseEntity<>(workerList, HttpStatus.OK);
     }
 

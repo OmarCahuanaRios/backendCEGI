@@ -26,9 +26,16 @@ public class EnterpriseServiceImpl implements EnterpriseService {
     @Override
     @Transactional(readOnly = true)
     public List<EnterpriseDto> findAllEnterprises() {
-        return enterpriseRepository.findAll().stream()
+        List<Enterprise> enterprises = enterpriseRepository.findAll();
+
+        enterprises.forEach(enterprise -> {
+            enterprise.updateWorkerNumber();
+        });
+
+        return enterprises.stream()
                 .map(enterprise -> modelMapper.map(enterprise, EnterpriseDto.class))
                 .toList();
+
     }
 
     @Override
@@ -43,7 +50,7 @@ public class EnterpriseServiceImpl implements EnterpriseService {
     @Transactional
     public EnterpriseDto createEnterprise(EnterpriseCreateDto enterpriseCreateDto) {
         try {
-            enterpriseCreateDto.setWorkersNumber(0);
+
             Enterprise enterprise = enterpriseRepository.save(modelMapper.map(enterpriseCreateDto, Enterprise.class));
             return modelMapper.map(enterprise, EnterpriseDto.class);
         } catch (Exception e) {

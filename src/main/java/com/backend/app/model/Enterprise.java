@@ -1,9 +1,12 @@
 package com.backend.app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
+
+import java.util.List;
 
 @Builder
 @Getter
@@ -23,8 +26,8 @@ public class Enterprise extends Auditable<String> {
     @Column(name = "enterprise_name", nullable = false, unique = true)
     private String enterpriseName;
 
-    @Column(nullable = false, name = "workers_number")
-    private Integer workersNumber;
+    @Transient
+    private int workersNumber;
 
     @Column(name = "phone_number", nullable = false, unique = true)
     private String phoneNumber;
@@ -32,4 +35,15 @@ public class Enterprise extends Auditable<String> {
     @Column(nullable = false, name = "office_number")
     private String officeNumber;
 
+    @OneToMany(mappedBy = "enterprise")
+    @JsonIgnore
+    private List<Worker> workerList;
+
+    public int getWorkersNumber() {
+        return workersNumber;
+    }
+
+    public void updateWorkerNumber() {
+        this.workersNumber = workerList.size();
+    }
 }

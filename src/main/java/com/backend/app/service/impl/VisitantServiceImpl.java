@@ -1,10 +1,12 @@
 package com.backend.app.service.impl;
 
+import com.backend.app.dto.VisitDto;
 import com.backend.app.dto.VisitantDto;
 import com.backend.app.dto.create.VisitantCreateDto;
 import com.backend.app.exception.DataProcessingException;
 import com.backend.app.exception.ResourceNotFoundException;
 import com.backend.app.model.Enterprise;
+import com.backend.app.model.Visit;
 import com.backend.app.model.Visitant;
 import com.backend.app.repository.EnterpriseRepository;
 import com.backend.app.repository.VisitantRepository;
@@ -31,6 +33,20 @@ public class VisitantServiceImpl implements VisitantService {
     @Transactional(readOnly = true)
     public List<VisitantDto> findAllVisitants() {
         return visitantRepository.findAll().stream()
+                .map(visitant -> modelMapper.map(visitant, VisitantDto.class))
+                .toList();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<VisitantDto> findAllVisitantsByEnterprise(String enterpriseName){
+
+
+        List<Visitant> visitants = visitantRepository.findAllByEnterprise_EnterpriseName(enterpriseName);
+        if (visitants == null || visitants.isEmpty()) {
+            throw new ResourceNotFoundException("Visitants", "enterpriseName", enterpriseName);
+        }
+        return visitants.stream()
                 .map(visitant -> modelMapper.map(visitant, VisitantDto.class))
                 .toList();
     }

@@ -1,5 +1,6 @@
 package com.backend.app.controller;
 
+import com.backend.app.dto.VisitDto;
 import com.backend.app.dto.VisitantDto;
 import com.backend.app.dto.create.VisitantCreateDto;
 import com.backend.app.service.VisitantService;
@@ -22,6 +23,12 @@ public class VisitantController {
     @GetMapping
     public ResponseEntity<List<VisitantDto>> getAllVisitants() {
         List<VisitantDto> visitantList = visitantService.findAllVisitants();
+        return new ResponseEntity<>(visitantList, HttpStatus.OK);
+    }
+
+    @GetMapping("/enterprise/{enterpriseName}")
+    public ResponseEntity<List<VisitantDto>> getAllVisitsByEnterprise(@PathVariable String enterpriseName){
+        List<VisitantDto> visitantList = visitantService.findAllVisitantsByEnterprise(enterpriseName);
         return new ResponseEntity<>(visitantList, HttpStatus.OK);
     }
 

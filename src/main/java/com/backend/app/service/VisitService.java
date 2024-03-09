@@ -1,6 +1,7 @@
 package com.backend.app.service;
 
 import com.backend.app.dto.VisitDto;
+import com.backend.app.dto.WorkerDto;
 import com.backend.app.dto.create.VisitCreateDto;
 import com.google.zxing.WriterException;
 
@@ -16,6 +17,8 @@ public interface VisitService {
     VisitDto createVisit(VisitCreateDto visitCreateDto) throws IOException, WriterException;
 
     VisitDto updateVisit(Integer id, VisitCreateDto visitCreateDto) throws IOException, WriterException;
+
+    List<VisitDto> findAllVisitsByEnterprise(String enterpriseName);
 
     VisitDto deleteVisit(Integer id);
 

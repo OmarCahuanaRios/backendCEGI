@@ -9,6 +9,8 @@ public interface WorkerService {
 
     List<WorkerDto> findAllWorkers();
 
+    List<WorkerDto> findAllWorkersByEnterprise(String enterpriseName);
+
     WorkerDto findWorkerById(Integer id);
 
     WorkerDto findWorkerByDni(String dni);
