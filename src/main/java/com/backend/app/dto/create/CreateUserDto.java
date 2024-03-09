@@ -26,4 +26,7 @@ public class CreateUserDto {
 
     @NotEmpty(message = "password is required")
     private String password;
+
+    @NotEmpty(message = "enterprise is required")
+    private String enterpriseName;
 }

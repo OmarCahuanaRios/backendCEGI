@@ -1,5 +1,6 @@
 package com.backend.app.dto.create;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -24,6 +25,7 @@ public class EnterpriseCreateDto {
     @Pattern(regexp = "^\\d{9}$", message = "Phone number must be 9 digits")
     private String phoneNumber;
 
-    private Integer workersNumber;
+
+
 
 }

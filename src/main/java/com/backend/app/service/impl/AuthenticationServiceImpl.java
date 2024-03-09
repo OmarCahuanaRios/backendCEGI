@@ -39,6 +39,7 @@ public class AuthenticationServiceImpl {
                 .lastname(request.getLastName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
+                .enterpriseName(request.getEnterpriseName())
                 .role(role)
                 .build();
         Optional<User> optionalUser = repository.findByEmail(request.getEmail());
@@ -51,6 +52,7 @@ public class AuthenticationServiceImpl {
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .role(savedUser.getRole())
+                .enterpriseName(savedUser.getEnterpriseName())
                 .build();
     }
 
@@ -68,6 +70,7 @@ public class AuthenticationServiceImpl {
         String jwtToken = jwtService.generateToken(user);
         saveUserToken(user, jwtToken);
         return AuthenticationResponse.builder()
+                .enterpriseName(user.getEnterpriseName())
                 .token(jwtToken)
                 .role(user.getRole())
                 .build();
