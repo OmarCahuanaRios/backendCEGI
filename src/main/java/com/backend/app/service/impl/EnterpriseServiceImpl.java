@@ -47,6 +47,13 @@ public class EnterpriseServiceImpl implements EnterpriseService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public EnterpriseDto findEnterpriseByName(String enterpriseName){
+        Enterprise enterprise = enterpriseRepository.findByEnterpriseName(enterpriseName);
+        return modelMapper.map(enterprise,EnterpriseDto.class);
+    }
+
+    @Override
     @Transactional
     public EnterpriseDto createEnterprise(EnterpriseCreateDto enterpriseCreateDto) {
         try {
