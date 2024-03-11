@@ -36,9 +36,7 @@ public class VisitDto extends Auditable<String> {
 
     private Boolean visitType;
 
-    private Worker worker;
-
     private Visitant visitant;
 
-    private Enterprise enterprise;
+
 }

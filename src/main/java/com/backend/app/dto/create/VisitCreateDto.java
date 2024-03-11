@@ -17,8 +17,6 @@ import java.util.Date;
 @NoArgsConstructor
 public class VisitCreateDto {
 
-    @JsonFormat(pattern = "dd-MM-yyyy")
-    private Date approbationDate;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
     @NotNull(message = "Appointment date is mandatory")
@@ -33,12 +31,9 @@ public class VisitCreateDto {
     @NotNull(message = "Visit type is mandatory")
     private Boolean visitType;
 
-    private Integer workerId;
-
     @NotNull(message = "Visitant Id is mandatory")
     private Integer visitantId;
 
-    @NotNull(message = "Enterprise Id is mandatory")
-    private Integer enterpriseId;
+
 
 }
