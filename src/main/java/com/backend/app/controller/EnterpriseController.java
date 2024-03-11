@@ -31,6 +31,12 @@ public class EnterpriseController {
         return new ResponseEntity<>(enterprise, HttpStatus.OK);
     }
 
+    @GetMapping("/name/{enterpriseName}")
+    public ResponseEntity<EnterpriseDto> getEnterpriseByName(@PathVariable String enterpriseName){
+        EnterpriseDto enterprise = enterpriseService.findEnterpriseByName(enterpriseName);
+        return new ResponseEntity<>(enterprise,HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<EnterpriseDto> createEnterprise(@RequestBody @Valid EnterpriseCreateDto enterpriseDto) {
         EnterpriseDto enterprise = enterpriseService.createEnterprise(enterpriseDto);

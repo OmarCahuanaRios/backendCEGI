@@ -11,6 +11,8 @@ public interface EnterpriseService {
 
     EnterpriseDto findEnterpriseById(Integer id);
 
+    EnterpriseDto findEnterpriseByName(String enterpriseName);
+
     EnterpriseDto createEnterprise(EnterpriseCreateDto enterpriseCreateDto);
 
     EnterpriseDto updateEnterprise(Integer id, EnterpriseCreateDto enterpriseCreateDto);
