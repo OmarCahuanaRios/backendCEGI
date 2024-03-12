@@ -1,9 +1,7 @@
 package com.backend.app.controller;
 
 import com.backend.app.dto.VisitDto;
-import com.backend.app.dto.WorkerDto;
 import com.backend.app.dto.create.VisitCreateDto;
-import com.backend.app.repository.VisitRepository;
 import com.backend.app.service.VisitService;
 import com.google.zxing.WriterException;
 import jakarta.validation.Valid;

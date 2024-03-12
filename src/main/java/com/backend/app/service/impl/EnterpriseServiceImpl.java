@@ -48,9 +48,9 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 
     @Override
     @Transactional(readOnly = true)
-    public EnterpriseDto findEnterpriseByName(String enterpriseName){
+    public EnterpriseDto findEnterpriseByName(String enterpriseName) {
         Enterprise enterprise = enterpriseRepository.findByEnterpriseName(enterpriseName);
-        return modelMapper.map(enterprise,EnterpriseDto.class);
+        return modelMapper.map(enterprise, EnterpriseDto.class);
     }
 
     @Override
@@ -75,6 +75,8 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 
             BeanUtils.copyProperties(enterpriseCreateDto, optionalEnterprise, "id", "createdBy", "createdDate");
             return modelMapper.map(enterpriseRepository.save(optionalEnterprise), EnterpriseDto.class);
+        } catch (ResourceNotFoundException e) {
+            throw e;
         } catch (Exception e) {
             //Throw a custom exception
             throw new DataProcessingException("Error updating the enterprise with ID: " + id);
@@ -90,6 +92,8 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 
             enterpriseRepository.deleteById(optionalEnterprise.getId());
             return modelMapper.map(optionalEnterprise, EnterpriseDto.class);
+        } catch (ResourceNotFoundException e) {
+            throw e;
         } catch (Exception e) {
             //Throw a custom exception
             throw new DataProcessingException("Error deleting the enterprise with ID: " + id);

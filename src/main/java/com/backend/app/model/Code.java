@@ -29,5 +29,4 @@ public class Code {
     @Column(name = "isUsed", nullable = false)
     private boolean isUsed;
 
-
 }
