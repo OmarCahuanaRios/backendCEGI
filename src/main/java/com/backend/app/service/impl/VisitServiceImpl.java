@@ -62,7 +62,7 @@ public class VisitServiceImpl implements VisitService {
     public List<VisitDto> findAllVisitsByEnterprise(String enterpriseName){
 
 
-        List<Visit> visits = visitRepository.findAllByEnterprise_EnterpriseName(enterpriseName);
+        List<Visit> visits = visitRepository.findAllByVisitant_EnterpriseEnterpriseName(enterpriseName);
         if (visits == null || visits.isEmpty()) {
             throw new ResourceNotFoundException("Visits", "enterpriseName", enterpriseName);
         }
