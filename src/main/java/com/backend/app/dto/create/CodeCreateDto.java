@@ -2,10 +2,12 @@ package com.backend.app.dto.create;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Range;
 
 import java.util.Date;
 
@@ -15,16 +17,14 @@ import java.util.Date;
 @NoArgsConstructor
 public class CodeCreateDto {
 
-    @NotNull(message = "code is required")
     private Integer code;
 
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     private Date creationHour;
 
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     private Date expirationHour;
 
-    @NotNull(message = "isUsed is required")
     private boolean isUsed;
 
 }

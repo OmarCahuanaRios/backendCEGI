@@ -13,7 +13,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @Service
 @AllArgsConstructor
@@ -43,6 +46,14 @@ public class CodeServiceImpl implements CodeService {
     @Transactional
     public CodeDto saveCode(CodeCreateDto codeDto) {
         try {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(codeDto.getCreationHour());
+            calendar.add(Calendar.MINUTE, 15);
+            Date expirationDate = calendar.getTime();
+            Random random = new Random();
+            codeDto.setExpirationHour(expirationDate);
+            codeDto.setUsed(false);
+            codeDto.setCode(random.nextInt(90000) + 10000);
             Code code = codeRepository.save(modelMapper.map(codeDto, Code.class));
             return modelMapper.map(code, CodeDto.class);
         } catch (Exception e) {
