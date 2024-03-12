@@ -46,14 +46,28 @@ public class CodeServiceImpl implements CodeService {
     @Transactional
     public CodeDto saveCode(CodeCreateDto codeDto) {
         try {
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(codeDto.getCreationHour());
-            calendar.add(Calendar.MINUTE, 15);
-            Date expirationDate = calendar.getTime();
+
+            Calendar creationCalendar = Calendar.getInstance();
+            creationCalendar.setTime(codeDto.getCreationHour());
+            creationCalendar.add(Calendar.HOUR_OF_DAY, 5);
+            Date creationDate = creationCalendar.getTime();
+
+
+            Calendar expirationCalendar = Calendar.getInstance();
+            expirationCalendar.setTime(creationDate);
+            expirationCalendar.add(Calendar.MINUTE, 15);
+            Date expirationDate = expirationCalendar.getTime();
+
             Random random = new Random();
+            int generatedCode = random.nextInt(90000) + 10000;
+
+
+            codeDto.setCreationHour(creationDate);
             codeDto.setExpirationHour(expirationDate);
             codeDto.setUsed(false);
-            codeDto.setCode(random.nextInt(90000) + 10000);
+            codeDto.setCode(generatedCode);
+
+
             Code code = codeRepository.save(modelMapper.map(codeDto, Code.class));
             return modelMapper.map(code, CodeDto.class);
         } catch (Exception e) {
