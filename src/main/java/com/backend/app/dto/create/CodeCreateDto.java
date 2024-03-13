@@ -23,7 +23,7 @@ public class CodeCreateDto {
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     private Date expirationHour;
 
-    private boolean isUsed;
+    private boolean used;
 
     @NotNull(message = "Enterprise ID is mandatory")
     private Integer visitantId;

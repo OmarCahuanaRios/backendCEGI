@@ -91,7 +91,7 @@ public class CodeServiceImpl implements CodeService {
             code.setUsed(false);
 
             message.setTo(optionalVisitant.getEmail());
-            message.setFrom("");
+            message.setFrom("omaroceanuz@gmail.com");
             message.setSubject("Código de acceso");
             message.setText("Su código de acceso es: " + generatedCode);
             javaMailSender.send(message);

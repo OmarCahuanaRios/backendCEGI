@@ -22,7 +22,7 @@ public class CodeDto {
 
     private Date expirationHour;
 
-    private boolean isUsed;
+    private boolean used;
 
     private Visitant visitant;
 

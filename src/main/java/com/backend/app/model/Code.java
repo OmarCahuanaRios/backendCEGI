@@ -27,8 +27,8 @@ public class Code {
     @Column(name = "expirationHour", nullable = false)
     private Date expirationHour;
 
-    @Column(name = "isUsed", nullable = false)
-    private boolean isUsed;
+    @Column(name = "used", nullable = false)
+    private boolean used;
 
     @ManyToOne
     private Visitant visitant;
