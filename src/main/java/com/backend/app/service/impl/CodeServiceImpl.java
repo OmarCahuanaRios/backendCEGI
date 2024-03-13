@@ -12,6 +12,8 @@ import com.backend.app.service.CodeService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +27,8 @@ import java.util.Random;
 public class CodeServiceImpl implements CodeService {
 
     private final CodeRepository codeRepository;
+
+    private final JavaMailSender javaMailSender;
 
     private final VisitantRepository visitantRepository;
 
@@ -61,6 +65,7 @@ public class CodeServiceImpl implements CodeService {
     @Transactional
     public CodeDto saveCode(CodeCreateDto codeDto) {
         try {
+            SimpleMailMessage message = new SimpleMailMessage();
             Visitant optionalVisitant = visitantRepository.findById(codeDto.getVisitantId())
                     .orElseThrow(() -> new ResourceNotFoundException("Visitant", "id", codeDto.getVisitantId()));
 
@@ -68,7 +73,6 @@ public class CodeServiceImpl implements CodeService {
             creationCalendar.setTime(codeDto.getCreationHour());
             creationCalendar.add(Calendar.HOUR_OF_DAY, 5);
             Date creationDate = creationCalendar.getTime();
-
 
             Calendar expirationCalendar = Calendar.getInstance();
             expirationCalendar.setTime(creationDate);
@@ -85,6 +89,13 @@ public class CodeServiceImpl implements CodeService {
             code.setExpirationHour(expirationDate);
             code.setVisitant(optionalVisitant);
             code.setUsed(false);
+
+            message.setTo(optionalVisitant.getEmail());
+            message.setFrom("");
+            message.setSubject("Código de acceso");
+            message.setText("Su código de acceso es: " + generatedCode);
+            javaMailSender.send(message);
+
             return modelMapper.map(codeRepository.save(code), CodeDto.class);
         } catch (ResourceNotFoundException e) {
             throw e;
