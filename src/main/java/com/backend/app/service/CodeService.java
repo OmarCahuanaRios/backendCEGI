@@ -11,6 +11,8 @@ public interface CodeService {
 
     CodeDto findCodeById(Integer id);
 
+    List<CodeDto> findAllCodeByVisitantId(Integer visitantId);
+
     CodeDto saveCode(CodeCreateDto codeDto);
 
     CodeDto updateCode(Integer id);

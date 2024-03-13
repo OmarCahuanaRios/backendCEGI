@@ -1,5 +1,6 @@
 package com.backend.app.dto;
 
+import com.backend.app.model.Visitant;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,5 +23,7 @@ public class CodeDto {
     private Date expirationHour;
 
     private boolean isUsed;
+
+    private Visitant visitant;
 
 }

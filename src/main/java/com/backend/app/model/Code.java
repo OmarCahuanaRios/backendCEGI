@@ -2,9 +2,10 @@ package com.backend.app.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
+
 import java.util.Date;
+
 @Builder
 @Getter
 @Setter
@@ -29,4 +30,6 @@ public class Code {
     @Column(name = "isUsed", nullable = false)
     private boolean isUsed;
 
+    @ManyToOne
+    private Visitant visitant;
 }

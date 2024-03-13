@@ -1,13 +1,10 @@
 package com.backend.app.dto.create;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Range;
 
 import java.util.Date;
 
@@ -26,5 +23,7 @@ public class CodeCreateDto {
     private Date expirationHour;
 
     private boolean isUsed;
+
+    private Integer visitantId;
 
 }

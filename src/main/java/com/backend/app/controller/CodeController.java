@@ -31,6 +31,12 @@ public class CodeController {
         return new ResponseEntity<>(code, HttpStatus.OK);
     }
 
+    @GetMapping("/visitant/{visitantId}")
+    public ResponseEntity<List<CodeDto>> findByVisitantId(@PathVariable Integer visitantId) {
+        List<CodeDto> codeList = codeService.findAllCodeByVisitantId(visitantId);
+        return new ResponseEntity<>(codeList, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<CodeDto> createCode(@RequestBody @Valid CodeCreateDto codeDto) {
         CodeDto code = codeService.saveCode(codeDto);

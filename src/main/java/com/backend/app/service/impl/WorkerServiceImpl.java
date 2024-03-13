@@ -39,8 +39,6 @@ public class WorkerServiceImpl implements WorkerService {
     @Override
     @Transactional(readOnly = true)
     public List<WorkerDto> findAllWorkersByEnterprise(String enterpriseName){
-
-
         List<Worker> workers = workerRepository.findAllByEnterprise_EnterpriseName(enterpriseName);
         if (workers == null || workers.isEmpty()) {
             throw new ResourceNotFoundException("Workers", "enterpriseName", enterpriseName);
