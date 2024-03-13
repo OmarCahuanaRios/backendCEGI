@@ -83,6 +83,7 @@ public class CodeServiceImpl implements CodeService {
             code.setCode(generatedCode);
             code.setCreationHour(creationDate);
             code.setExpirationHour(expirationDate);
+            code.setVisitant(optionalVisitant);
             code.setUsed(false);
             return modelMapper.map(codeRepository.save(code), CodeDto.class);
         } catch (ResourceNotFoundException e) {

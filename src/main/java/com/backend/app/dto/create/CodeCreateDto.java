@@ -1,6 +1,7 @@
 package com.backend.app.dto.create;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,7 @@ public class CodeCreateDto {
 
     private boolean isUsed;
 
+    @NotNull(message = "Enterprise ID is mandatory")
     private Integer visitantId;
 
 }
