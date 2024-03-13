@@ -38,8 +38,8 @@ public class CodeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CodeDto> updateCode(@PathVariable Integer id, @RequestBody @Valid CodeCreateDto codeCreateDto) {
-        CodeDto codeDto = codeService.updateCode(id, codeCreateDto);
+    public ResponseEntity<CodeDto> updateCode(@PathVariable Integer id) {
+        CodeDto codeDto = codeService.updateCode(id);
         return new ResponseEntity<>(codeDto, HttpStatus.OK);
     }
 

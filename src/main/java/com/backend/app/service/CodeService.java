@@ -13,7 +13,7 @@ public interface CodeService {
 
     CodeDto saveCode(CodeCreateDto codeDto);
 
-    CodeDto updateCode(Integer id, CodeCreateDto codeDto);
+    CodeDto updateCode(Integer id);
 
     CodeDto deleteCodeById(Integer id);
 }

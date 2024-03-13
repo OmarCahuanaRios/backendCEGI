@@ -78,11 +78,11 @@ public class CodeServiceImpl implements CodeService {
 
     @Override
     @Transactional
-    public CodeDto updateCode(Integer id, CodeCreateDto codeDto) {
+    public CodeDto updateCode(Integer id) {
         try {
             Code optionalCode = codeRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Code", "id", id));
-            BeanUtils.copyProperties(codeDto, optionalCode);
+            optionalCode.setUsed(true);
             return modelMapper.map(codeRepository.save(optionalCode), CodeDto.class);
         } catch (ResourceNotFoundException e) {
             throw e;
