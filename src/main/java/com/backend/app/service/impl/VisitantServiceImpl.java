@@ -41,7 +41,6 @@ public class VisitantServiceImpl implements VisitantService {
     @Transactional(readOnly = true)
     public List<VisitantDto> findAllVisitantsByEnterprise(String enterpriseName){
 
-
         List<Visitant> visitants = visitantRepository.findAllByEnterprise_EnterpriseName(enterpriseName);
         if (visitants == null || visitants.isEmpty()) {
             throw new ResourceNotFoundException("Visitants", "enterpriseName", enterpriseName);
