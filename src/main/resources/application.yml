@@ -1,0 +1,11 @@
+server:
+  ssl:
+    enabled: true
+    key-alias: spring-https
+    key-store: classpath:javatechie.jks
+    key-store-type: JKS
+    key-password: zoxrecepcion
+    key-store-password: zoxrecepcion
+
+
+  port: 7777
